@@ -55,7 +55,7 @@ function TopBarre(props) {
             <View style={styles.containerNavBarre}>
 
                 
-                <Image style={{height: 50, width: 50, borderRadius: 100, marginLeft: 30, marginTop: 0, backgroundColor: 'rgba(255, 255, 255, 0)',}} source={require('../Images/WeSportLogo.png')}/>                
+                <Image style={{height: 50, width: 50, borderRadius: 100, marginLeft: 30, marginTop: 0, marginBottom: 10, backgroundColor: 'rgba(255, 255, 255, 0)',}} source={require('../Images/WeSportLogo.png')}/>                
 
                 <TouchableOpacity activeOpacity={1} onPress={() => props.navigation.navigate('MessageriePage')}>
 

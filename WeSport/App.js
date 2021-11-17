@@ -7,6 +7,7 @@ import MainPage from './Pages/MainPage';
 import ProfilPage from './Pages/ProfilPage';
 import AcceuilPage from './Pages/AcceuilPage';
 import MapPage from './Pages/MapPage';
+import CreateEvenementPage from './Pages/CreateEvenementPage';
 
 
 const Stack = createStackNavigator();
@@ -20,6 +21,7 @@ export default class App extends React.Component {
           <Stack.Screen name="ProfilPage" component={ProfilPage} options={{ headerShown: false }} />
           <Stack.Screen name="AcceuilPage" component={AcceuilPage} options={{ headerShown: false }} />
           <Stack.Screen name="MapPage" component={MapPage} options={{ headerShown: false }} />
+          <Stack.Screen name="CreateEvenementPage" component={CreateEvenementPage} options={{ headerShown: false }} />
         </Stack.Navigator>
       </NavigationContainer>
     )

@@ -1,34 +1,49 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { StyleSheet, Text, FlatList, View, ScrollView, ImageBackground } from 'react-native';
+import { useEffect, useState } from 'react';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 function Acceuil(props) {
 
-        var headerFlatList = () => {
+        let [evenements, setEvenements] = useState("");
 
+        let mounted = true;
 
-            return (
-                <View>
-                    <TouchableOpacity onPress={()=> alert('c\'est ici que vous pouvez voir qui sont les personnes avec qui vous avez des affinités, notre algorithme se fit sur vos réactions et celles des autres')}>
-                        <Text style={styles.title}>Affinités</Text>
-                    </TouchableOpacity>
+        useEffect(() => {
+            if(mounted){
+                fetch('https://hugocabaret.onthewifi.com/WeSport/API/requetes/Evenement/GetMyEvenements.php?UtilisateurId=1')
+                .then((response) => response.json())
+                .then((data) => setEvenements(data)); 
+            }
+            return () => mounted = false;
+        }, []);
 
-                    
-
-                    <TouchableOpacity onPress={() => alert('Ici vous pouvez avoir un aperçu général de toutes les affiches, les nouveautés etc.')}>
-                        <Text style={styles.title}>News</Text>
-                    </TouchableOpacity>
-                </View>
-                
-            );
-
-        };
+        let renderItemEvenement = ({ item }) => (
+            <TouchableOpacity style={{backgroundColor: '#bbb', width: '95%', height: 150, margin: 10, borderRadius: 19, }}>
+                <ImageBackground style={{ width: '100%', height: 150, borderRadius: 19, }} imageStyle={{ borderRadius: 15}} source={{uri : item.Image}} resizeMode="cover">
+                    <Text style={styles.titleWhite}>{item.Nom}</Text>
+                    <Text style={styles.lieu}>{item.Lieu}</Text>
+                    <Text style={styles.date}>{item.HeureDebut}</Text>
+                </ImageBackground>
+            </TouchableOpacity>
+        );
     
         return (
 
-            <View style={{position: 'absolute', top: 100}}>
-                <Text>Acceuil</Text>
+            <View style={{position: 'absolute', top: 100, width: '100%'}}>
+                <ScrollView style={{height: 700}}>
+
+                    <Text style={styles.title}>Evenements</Text>
+
+                    <TouchableOpacity onPress={() => props.navigation.navigate('CreateEvenementPage')} style={{backgroundColor: '#bbb', width: '95%', height: 100, margin: 10, borderRadius: 19, }}>
+                        <Text style={{marginBottom: 'auto', marginTop: 'auto', marginLeft: 'auto', marginRight: 'auto', fontSize: 60}}>+</Text>
+                    </TouchableOpacity>
+
+                    <FlatList data={evenements} renderItem={renderItemEvenement} keyExtractor={item => item.Identifier} numColumns="1"/>
+
+                    <View style={{height: 100}}></View>
+                </ScrollView>
             </View>
         )
     }
@@ -46,10 +61,28 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
     },
     title: {
-        fontSize: 25,
-        marginLeft: 10,
+        fontSize: 30,
+        marginLeft: 20,
         color: 'black',
-      },
+        marginTop: 40
+    },
+    titleWhite: {
+        fontSize: 25,
+        marginLeft: 20,
+        color: 'white',
+    },
+    date: {
+        position: 'absolute',
+        bottom: 10,
+        right: 10,
+        color: 'white',
+    },
+    lieu: {
+        position: 'absolute',
+        bottom: 10,
+        left: 10,
+        color: 'white',
+    }
   })
 
   export default Acceuil;
