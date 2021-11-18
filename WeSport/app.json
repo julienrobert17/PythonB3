@@ -25,8 +25,13 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.equi.talkandpoke",
-      "googleServicesFile": "./google-services.json"
+      "package": "com.destrierfunestre.wesport",
+      "googleServicesFile": "./google-services.json",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyB-1FUc_dZ4DixTQJ3_ZV4GYEF7eZHM07Y"
+        }
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
