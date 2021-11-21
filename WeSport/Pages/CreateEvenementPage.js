@@ -18,6 +18,7 @@ function Acceuil(props) {
 
         let mounted = true;
 
+        //Au lancement on récupere les différents sports que l'on peut selectionner
         useEffect(() => {
             if(mounted){
                 fetch('https://hugocabaret.onthewifi.com/WeSport/API/requetes/Sport/GetSports.php')
@@ -27,6 +28,7 @@ function Acceuil(props) {
             return () => mounted = false;
         }, []);
 
+        //Permet de superposer un symbole 'check' à l'image du sport pour montrer quel sport est selectionné
         let Check = ({ SportId }) => {
             if(SportId == sportSelected){
                 return(
@@ -42,12 +44,14 @@ function Acceuil(props) {
             }
         }
 
+        //Action de création d'un evenement puis redirection vers page d'acceuil
         function createEvenement(){
             fetch('https://hugocabaret.onthewifi.com/WeSport/API/requetes/Evenement/CreateEvenement.php?Lieu=' + lieu + "&HeureDebut=" + dateDebut + "&HeureFin=" + dateFin + "&CreateurId=1&SportId=" + sportSelected)
             props.navigation.pop()
         }
             
 
+        //Affichage d'un sport
         let renderItemSport = ({ item }) => (
             <TouchableOpacity onPress={() => setSportSelected(item.SportId)} style={{backgroundColor: '#bbb', width: 100, height: 100, margin: 10, borderRadius: 100, }}>
                 <ImageBackground style={{ width: 100, height: 100, borderRadius: 19, }} imageStyle={{ borderRadius: 100}} source={{uri : item.Image}} resizeMode="cover">
@@ -57,6 +61,7 @@ function Acceuil(props) {
             </TouchableOpacity>
         );
     
+        //Permet la selection des dates de début et de fin de l'evenement
         const onChangeDebut = (event, selectedDate) => {
             const currentDate = selectedDate || dateDebut;
             setShowDateDebut(Platform.OS === 'ios');
@@ -95,6 +100,7 @@ function Acceuil(props) {
             showFinMode('time');
           };
           
+
         return (
 
             <View style={{position: 'absolute', top: 0, width: '100%'}}>
@@ -109,11 +115,13 @@ function Acceuil(props) {
 
                     <Text style={styles.smalltitle}>Choisir le sport</Text>
 
+                    {/* Liste des sports disponible */}
                     <FlatList style={{marginLeft: 'auto', marginRight: 'auto'}} data={sports} renderItem={renderItemSport} keyExtractor={item => item.Identifier} numColumns="3"/>
 
                     <Text style={styles.smalltitle}>Choisir les dates</Text>
 
                     
+                    {/* Bouton de selection des dates */}
                     <View style={{flexDirection: 'row', marginLeft: 'auto', marginRight: 'auto'}}>
                         <View style={styles.button}>
                             <Button onPress={showDateDebutpicker} title="Jour de début" />
@@ -138,7 +146,7 @@ function Acceuil(props) {
 
                     
                     <Text style={styles.smalltitle}>Choisir le lieu</Text>
-                    
+                    {/* Selection du lieu */}
                     <View style={styles.input}>
                         <TextInput value={lieu} onChangeText={setLieu} placeholder={"Lieu"}/>
                     </View>
@@ -165,6 +173,7 @@ function Acceuil(props) {
                         />
                     )}
 
+                        {/* Bouton de création */}
                     <TouchableOpacity onPress={() => createEvenement()} style={{backgroundColor: '#aaa', width: 200, height: 60, borderRadius: 100, marginRight: 'auto', marginLeft: 'auto'}}>
                         <Text style={{marginRight: 'auto', marginLeft: 'auto', marginTop: 'auto', marginBottom: 'auto'}}>Créer un évenement</Text>
                     </TouchableOpacity>

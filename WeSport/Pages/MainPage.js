@@ -17,6 +17,7 @@ function MainPage({ navigation, route }) {
 
 
 
+    //Ce système permet de faire une single page en charge uniquement le Component qui est selectionné
     var Content = () => {
         if(acceuil){
             return(
@@ -52,6 +53,7 @@ function MainPage({ navigation, route }) {
                     <TopBarre navigation={navigation}/>
                 </View>
 
+            {/* NAVBARRE */}
                 <View style={styles.containerNavBarre}>
                     <TouchableOpacity activeOpacity={1} onPress={() => LoadAcceuil()}>
                         <Image style={{height: 40, width: 40, opacity: 0.6, borderRadius: 100, backgroundColor: 'rgba(255, 255, 255, 0)', marginTop: 'auto', marginBottom: 'auto'}} source={require('../Images/rendezvous.jpg')}/>

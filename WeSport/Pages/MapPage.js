@@ -8,6 +8,7 @@ export default function MapPage(props){
     return(
         <View style={{position: 'absolute'}}>
             <ScrollView style={{height: 900}}>
+                {/* Affichage de la map et des markers */}
                 <MapView initialRegion={{
                             latitude: 48.8534,
                             longitude: 2.3488,
@@ -18,9 +19,30 @@ export default function MapPage(props){
 
                     <Marker
                         key={1}
-                        coordinate={{latitude: 48.8534, longitude: 2.3488,}}
-                        title="text"
-                        description="autre"
+                        coordinate={{latitude: 48.8524, longitude: 2.3498,}}
+                        title="Jardin de notre dame de paris"
+                        description="Pétanque"
+                        />
+
+                    <Marker
+                        key={1}
+                        coordinate={{latitude: 48.878, longitude: 2.38,}}
+                        title="Parc des buttes Chaumont"
+                        description="Course a pied"
+                        />
+
+                    <Marker
+                        key={1}
+                        coordinate={{latitude: 48.837, longitude: 2.33,}}
+                        title="Montparnasse jardin"
+                        description="Basket"
+                        />
+
+                    <Marker
+                        key={1}
+                        coordinate={{latitude: 48.863, longitude: 2.33,}}
+                        title="Jardin du louvres"
+                        description="Football"
                         />
 
                 </MapView>
